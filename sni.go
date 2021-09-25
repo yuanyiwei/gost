@@ -103,6 +103,10 @@ func (h *sniHandler) Handle(conn net.Conn) {
 			conn.RemoteAddr(), conn.LocalAddr(), err)
 		return
 	}
+	hosts := h.options.Node.Values["host"]
+	if len(hosts) > 0 {
+		host = hosts[0]
+	}
 
 	_, sport, _ := net.SplitHostPort(h.options.Host)
 	if sport == "" {
